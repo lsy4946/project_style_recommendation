@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/style-user-signup.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 회원가입 폼 -->
+<div class="signup-form">
+    <h1>회원가입</h1>
+    <form name="joinForm" action="/user/signup" method="POST">
+        <input type="text" name="username" id="username" placeholder="사용자 ID" required>
+        <button class="id-confirm" id="id-confirm" type="button" onclick="checkDuplicate()">중복확인</button><br><br>
+        <input type="password" name="password" placeholder="비밀번호" required><br>
+        <input type="password" name="confirm_password" placeholder="비밀번호 확인" required><br>
+        <input type="text" name="name" placeholder="이름" required><br>
+        <label for="gender">성별 : </label><select name="gender" id="gender">
+            <option value="male">남</option>
+            <option value="female">여</option>
+        </select><br><br>
+        <input type="email" name="email" id="email" placeholder="이메일 주소" required>
+        <button type="button" id="emailButton" onclick="sendVerificationEmail()">인증 메일 전송</button><br>
+        <input type="text" id="verificationCode" name="verification_code" placeholder="인증번호 입력" style="margin-top: 10px;"><br>
+        <select name="role" id="role">
+            <option value="USER">일반 사용자</option>
+            <option value="PROFESSIONAL">전문가</option>
+        </select>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <button type="submit" >가입하기</button>
+    </form>
+</div>
+
+<script>
+    // 폼 데이터 전송 함수
+    function submitForm() {
+        // 폼 요소 가져오기
+        var form = document.querySelector('form');
+        var formData = new FormData(form);
+
+        // 폼 데이터 전송
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/user/signup', true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // 성공적으로 서버로 데이터를 전송한 경우에 대한 처리
+                console.log('폼 데이터 전송 성공!');
+                window.location.href='/login';
+            } else {
+                // 서버로 데이터 전송 실패 시에 대한 처리
+                console.error('폼 데이터 전송 실패');
+            }
+        };
+        xhr.send(formData);
+    }
+
+    idConfirm = document.getElementById('id-confirm')
+    idConfirmed = false
+    function checkDuplicate() {
+        // 중복확인 기능을 구현할 수 있는 JavaScript 코드 작성
+        // 여기서는 간단하게 alert 창을 띄워서 구현 예정
+        alert('사용할 수 있는 ID입니다.');
+        idConfirm.textContent = '인증 완료'
+        idConfirmed = true
+    }
+
+    emailButton = document.getElementById('emailButton')
+    emailVerified = false
+    function sendVerificationEmail() {
+        var email = document.getElementById('email').value;
+        // 여기서 이메일을 서버로 전송하여 인증 메일을 발송하는 로직을 구현
+        // 일단 임시로 클릭하면 인증이 완료되도록 함
+        emailVerified = true;
+        emailButton.textContent = '인증 완료'
+
+        alert('인증 메일을 ' + email + ' 주소로 전송했습니다.');
+    }
+</script>
+
+</body>
+</html>

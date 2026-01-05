@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 관리 페이지</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav.side-ui {
+            height: 100vh; /* 화면 높이 전체 */
+            width: 200px; /* 네비게이션 바 폭 */
+            position: fixed; /* 화면 위치 고정 */
+            top: 0;
+            left: 0;
+            background-color: #333; /* 배경색 */
+            padding-top: 20px; /* 상단 여백 */
+            color: white; /* 글자색 */
+        }
+
+        nav.side-ui a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        nav.side-ui a:hover {
+            background-color: #555; /* 호버시 배경색 */
+        }
+
+        /* 페이지 내용 스타일 */
+        .content {
+            margin-left: 200px; /* 네비게이션 바 폭 만큼 왼쪽 여백 설정 */
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            color: black;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+        }
+
+        .pagination a.active {
+            background-color: #333;
+            color: white;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+        /* 검색 입력칸 스타일 */
+        .search-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            margin-right: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-container button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .target{
+            display: block;
+    width: auto;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:repalce="/admin/navigation/nav-admin.html"></div>
+
+<!-- 페이지 내용 -->
+<div class="content">
+    <h1>사용자 관리 페이지</h1>
+
+    <!-- 검색 입력칸 -->
+    <div class="search-container">
+        <select class="target">
+            <option value="id">ID</option>
+
+        </select>
+        <input type="text" id="searchInput" placeholder="사용자 검색">
+        <button onclick="searchUser()">검색</button>
+    </div>
+
+    <!-- 사용자 목록 테이블 -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>식별번호</th>
+                <th>관리</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <tr>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination (페이지 번호) -->
+    <div class="pagination" id="pagination">
+    </div>
+</div>
+
+<script>
+    // 예시 사용자 정보 생성 및 테이블에 추가
+    document.addEventListener("DOMContentLoaded", function() {
+        var tableBody = document.getElementById("userTableBody");
+        var pagination = document.getElementById("pagination");
+        var usersPerPage = 10;
+        var totalUsers = 15; // 예시 사용자 수를 30명으로 변경
+
+        // 사용자 정보 생성 및 테이블에 추가
+        for (var i = 0; i < totalUsers; i++) {
+            var userId = "user" + (i + 1).toString().padStart(3, '0');
+            var userName = "홍길동" + (i + 1);
+            var userEmail = "user" + (i + 1) + "@example.com";
+            var userIdentifier = "100" + (i + 1);
+            var userDetailsLink = '<a href="#">상세 보기</a>';
+
+            var row = '<tr>' +
+                          '<td>' + userId + '</td>' +
+                          '<td>' + userName + '</td>' +
+                          '<td>' + userEmail + '</td>' +
+                          '<td>' + userIdentifier + '</td>' +
+                          '<td>' + userDetailsLink + '</td>' +
+                      '</tr>';
+
+            tableBody.innerHTML += row;
+        }
+
+        // Pagination 생성
+        var totalPages = 5;
+        for (var page = 1; page <= totalPages; page++) {
+            var pageNumber = '<a href="#" onclick="changePage(' + page + ')">' + page + '</a>';
+            if(page==1){
+                pageNumber= '<a href="#" class="active" onclick="changePage(' + page + ')">' + page + '</a>';
+            }
+            pagination.innerHTML += pageNumber;
+        }
+    });
+
+    // 페이지 변경 함수
+    function changePage(page) {
+        var tableBody = document.getElementById("userTableBody");
+        var usersPerPage = 10;
+        var startIndex = (page - 1) * usersPerPage;
+        var endIndex = startIndex + usersPerPage;
+        var rows = tableBody.getElementsByTagName("tr");
+
+        // 모든 행을 숨김
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = "none";
+        }
+
+        // 해당 페이지의 행만 보이도록 설정
+        for (var i = startIndex; i < endIndex && i < rows.length; i++) {
+            rows[i].style.display = "";
+        }
+    }
+
+    // 사용자 검색 함수
+    function searchUser() {
+        var input = document.getElementById("searchInput").value.toUpperCase();
+        var rows = document.getElementById("userTableBody").getElementsByTagName("tr");
+
+        for (var i = 0; i < rows.length; i++) {
+            var userName = rows[i].getElementsByTagName("td")[1];
+            if (userName) {
+                var textValue = userName.textContent || userName.innerText;
+                if (textValue.toUpperCase().indexOf(input) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

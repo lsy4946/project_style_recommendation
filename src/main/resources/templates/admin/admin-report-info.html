@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="meta-test" th:content="${true}">
+  <title>유저 정보</title>
+  <style>
+
+    nav {
+      height: 100vh; /* 화면 높이 전체 */
+      width: 200px; /* 네비게이션 바 폭 */
+      position: fixed; /* 화면 위치 고정 */
+      top: 0;
+      left: 0;
+      background-color: #333; /* 배경색 */
+      padding-top: 20px; /* 상단 여백 */
+      color: white; /* 글자색 */
+    }
+
+    nav a {
+      display: block;
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+    }
+
+    nav a:hover {
+      background-color: #555; /* 호버시 배경색 */
+    }
+
+    /* 페이지 내용 스타일 */
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .user-info {
+      margin-top: 20px;
+    }
+
+    .user-info div {
+      margin-bottom: 10px;
+    }
+
+    .user-info label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    select {
+      padding: 5px;
+      border-radius: 3px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- 네비게이션 바 -->
+<div th:replace="/admin/navigation/nav-admin"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+  <h1>신고 내용</h1>
+  <div class="report-info">
+    <label for="title">제목 : </label>
+    <span id="title" th:text="${report.title}"></span>
+    <br>
+    <label for="reason">사유 : </label>
+    <span id="reason" th:text="${report.getContent()}"></span>
+    <br>
+    <label for="status">상태 : </label>
+    <span id="status" th:text="${report.getStatus()}"></span>
+    <br>
+    <div th:if="${report.object_type.equals('article')}">
+      <h1 th:text="${article.getTitle()}">게시글 제목</h1>
+      <hr>
+      <div class="post-info">
+        <div><span>작성자: </span> <a th:href="'/admin/userinfo/' + ${article.getWriter().getIdNum()}" th:text="${article.getWriter().getUsername()}">username</a></div>
+        <span th:text="'작성일 : ' + ${article.getTimeStamp()}">작성일: 2024-04-08</span>
+        <span th:text="'조회수 : ' + ${article.getView()}">조회수: 100</span>
+      </div>
+      <hr>
+      <p th:text="${article.getContent()}">
+      </p>
+    </div>
+
+    <div th:if="${report.object_type.equals('comment')}">
+      <div class="comment-head">
+        <span th:text="${comment.getWriter().getUsername()}" class="comment-writer">username2</span>
+        <div>
+          <a th:href="'/admin/ban/' + ${comment.getWriter().getIdNum()}" style="font-size: small; margin-right: 5px;">차단</a>
+          <a th:href="'/admin/comment/delete/' + ${comment.getCommentID()}" style="font-size: small; margin-right: 5px;">삭제</a>
+          <span class="comment-time" th:text="${comment.getTimeStamp()}">2024-04-12 18:09:42</span></div>
+      </div>
+      <hr>
+      <span class="comment-text" th:text="${comment.getContent()}">Lorem, ipsum dolor sit amet consectetur</span>
+    </div>
+  </div>
+  <form th:action="'/admin/block/' + ${target_id}" method="post">
+    <select name="dataType" id="dataType" onchange="onDataTypeChanged()">
+      <option value="permanent">영구</option>
+      <option value="month">월</option>
+      <option value="day">일</option>
+      <option value="hour">시간</option>
+    </select>
+    <br>
+    <div id="div-length" style="display: none">
+      <label for="blockLength">차단 기간</label>
+      <input type="text" id="blockLength" name="blockLength" value="0">
+    </div>
+    <br>
+    <label for="whyBlocked">차단 사유</label>
+    <input type="text" id="whyBlocked" name="whyBlocked" th:value="${report.getContent()}" required>
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <button type="submit">차단</button>
+  </form>
+</div>
+
+<script>
+  var dataType = document.getElementById("dataType")
+  var divLength = document.getElementById("div-length")
+
+  function onDataTypeChanged(){
+    if(dataType.value === "permanent")
+      divLength.style.display = "none"
+    else
+      divLength.style.display = "block"
+  }
+
+  // 페이지가 로드될 때 초기 상태를 설정
+  onDataTypeChanged();
+</script>
+
+</body>
+</html>

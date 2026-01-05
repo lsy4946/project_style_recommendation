@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/style-user-signup-tac.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div class="content">
+    <h2>이용약관</h2>
+    <div class="container-term">
+        <textarea name="" id="" cols="30" rows="10" disabled="disabled">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id maxime assumenda eligendi eveniet perspiciatis laborum error dolorem, laudantium, officiis, quidem exercitationem doloribus aliquam. Commodi, qui deleniti. Quas deserunt fugit odio.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quae recusandae sit inventore nihil dolor vero dolorem magni harum ab laudantium nesciunt totam consequatur sed veritatis labore, laboriosam, explicabo quasi?
+        </textarea>
+        <div class="checkbox-container">
+            <input type="checkbox" id="agreeCheckbox" style="float: left;">
+            <p>약관에 동의합니다.</p>
+        </div>
+        <button id="signupButton" onclick="signupOnclick()">회원가입</button>
+    </div>
+</div>
+
+<script>
+    signupButton = document.getElementById('signupButton')
+    agreeCheckbox = document.getElementById('agreeCheckbox')
+    function signupOnclick(){
+        if(agreeCheckbox.checked){
+            window.location.href = '/user/signup'
+        }
+        else
+            window.alert('약관에 동의하지 않으면 회원가입을 하실 수 없습니다.')
+    }
+    // 체크박스 상태 변경 이벤트 리스너 등록
+    // document.getElementById('agreeCheckbox').addEventListener('change', function() {
+    //     var agreeCheckbox = document.getElementById('agreeCheckbox');
+    //     var signupButton = document.getElementById('signupButton');
+    //     // 체크박스가 체크되었는지 확인하여 버튼 활성화/비활성화
+    //     if (agreeCheckbox.checked) {
+    //         signupButton.disabled = false; // 버튼 활성화
+    //     } else {
+    //         signupButton.disabled = true; // 버튼 비활성화
+    //     }
+    // });
+</script>
+
+</body>
+</html>

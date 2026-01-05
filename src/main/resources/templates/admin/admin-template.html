@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 네비게이션 바</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            height: 100vh; /* 화면 높이 전체 */
+            width: 200px; /* 네비게이션 바 폭 */
+            position: fixed; /* 화면 위치 고정 */
+            top: 0;
+            left: 0;
+            background-color: #333; /* 배경색 */
+            padding-top: 20px; /* 상단 여백 */
+            color: white; /* 글자색 */
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        nav a:hover {
+            background-color: #555; /* 호버시 배경색 */
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:repalce="/admin/navigation/nav-admin.html"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px; padding: 20px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+    <h1>네비게이션 바 예시</h1>
+    <p>이곳에 페이지 컨텐츠를 작성하세요.</p>
+    <p>네비게이션 바 항목을 클릭하여 해당 페이지로 이동합니다.</p>
+</div>
+
+</body>
+</html>

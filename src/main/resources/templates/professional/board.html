@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판 페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/style-user.css">
+    <link rel="stylesheet" type="text/css" href="/css/style-board.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 웹 페이지 내용 -->
+<div class="content">
+    <div class="board">
+        <h2>전문가 게시판</h2>
+        <p style="color: red" th:text="${error}"></p>
+        <table>
+            <thead>
+            <tr>
+                <th>글제목</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody id="article-tablebody">
+            <tr th:each="article : ${articleRowList}">
+                <td><a th:text="${article.title}" th:href="${article.link}"></a></td>
+                <td th:text="${article.getWriter()}"></td>
+                <td th:text="${article.getTimeStamp()}"></td>
+                <td th:text="${article.getView()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- 페이지 네비게이션 -->
+        <div class="pagination" id="pagination">
+
+        </div>
+    </div>
+</div>
+
+<!-- 게시글 작성 버튼 -->
+<a href="/board/professional/write" class="add-post-button">게시글 작성</a>
+
+<hr>
+<script src="/scripts/script_user.js" defer></script>
+</body>
+</html>

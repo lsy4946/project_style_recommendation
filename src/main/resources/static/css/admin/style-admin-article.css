@@ -1,0 +1,128 @@
+/* 버튼 스타일 */
+.action-buttons {
+
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FF8787;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF6666;
+}
+
+.board {
+    text-align: left;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #1d1d1d;
+    color: white;
+    font-weight: normal;
+}
+
+.post a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.post a:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+}
+
+.pagination a.active {
+    background-color: #008791;
+    color: white;
+    border: 1px solid #008791;
+}
+.comment-container {
+    border: 1px solid #ddd; /* 회색 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 처리 */
+    padding: 15px; /* 내부 여백 */
+    margin-bottom: 15px; /* 아래 여백 */
+}
+
+/* 댓글 제목 스타일 */
+.comment-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 각 댓글 스타일 */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* 연한 회색 테두리를 이용해 댓글 사이 구분 */
+}
+
+/* 댓글 헤더 스타일 */
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+}
+.rateUp-comment img{
+    width: 15px;
+    height: 15px;
+}
+.rateDown-comment img{
+    width: 15px;
+    height: 15px;
+}
+
+.comment-time{
+    font-size: small;
+}
+
+.comment-writer{
+    font-weight: bold;
+}
+
+/* 댓글 텍스트 스타일 */
+.comment-text {
+    color: #333;
+    line-height: 1.5;
+}

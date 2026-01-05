@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 네비게이션 바</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            height: 100vh; /* 화면 높이 전체 */
+            width: 200px; /* 네비게이션 바 폭 */
+            position: fixed; /* 화면 위치 고정 */
+            top: 0;
+            left: 0;
+            background-color: #333; /* 배경색 */
+            padding-top: 20px; /* 상단 여백 */
+            color: white; /* 글자색 */
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        nav a:hover {
+            background-color: #555; /* 호버시 배경색 */
+        }
+
+        /* 게시판 목록 스타일 */
+        .board {
+            text-align: left;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1d1d1d;
+            color: white;
+            font-weight: normal;
+        }
+
+        .post a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            margin-right: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #008791;
+            color: white;
+            border: 1px solid #008791;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:repalce="/admin/navigation/nav-admin.html"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px; padding: 20px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+    <table>
+        <thead>
+            <tr>
+                <th>글제목</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+                <th>조회수</th>
+            </tr>
+        </thead>
+        <tbody id="postTableBody">
+            <tr class="post" th:each="article : ${articles}">
+                <td><a th:href="'/admin/article/' + ${article.getArticleID()}" th:text="${article.getTitle()}">게시물 제목 1</a></td>
+                <td><a th:href="'/admin/userinfo/' + ${article.getWriter().getIdNum()}" th:text="${article.getWriter().getUsername()}">작성자1</a></td>
+                <td th:text="${article.getTimeStamp()}">2024-04-8</td>
+                <td th:text="${article.getView()}">1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이지 네비게이션 -->
+    <div class="pagination" id="pagination">
+        <!-- 자바스크립트를 통해 페이지 번호가 자동으로 생성됩니다 -->
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const postsPerPage = 15;
+        const totalPosts = 30;
+        const totalPages = 10;
+        const postTableBody = document.getElementById("postTableBody");
+        const paginationContainer = document.getElementById("pagination");
+
+        // 페이지 네비게이션 자동 생성
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement("a");
+            pageLink.href = "#";
+            pageLink.textContent = i;
+            if (i === 1) {
+                pageLink.classList.add("active");
+            }
+            pageLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                // 페이지 전환 로직을 구현할 수 있습니다
+                // 이 예제에서는 페이지 번호 클릭 시 active 클래스만 토글합니다
+                const currentPage = document.querySelector(".pagination a.active");
+                currentPage.classList.remove("active");
+                pageLink.classList.add("active");
+            });
+            paginationContainer.appendChild(pageLink);
+        }
+    });
+</script>
+
+</body>
+</html>

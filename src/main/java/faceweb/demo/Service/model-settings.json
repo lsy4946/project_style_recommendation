@@ -1,0 +1,5 @@
+{ 
+    "name": "best_mlp_model_female", 
+    "version": "v1.0.0", 
+    "implementation": "mlserver_sklearn.SKLearnModel" 
+}

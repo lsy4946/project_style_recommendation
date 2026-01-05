@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/style-write.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 게시글 작성 폼 -->
+<div class="content">
+    <h1>게시글 작성</h1>
+    <form action="/board/professional/write" method="POST">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" required>
+
+        <p>작성자 : </p>
+        <p th:text="${username}"></p>
+        <input type="hidden" id="board" name="board" value="user">
+
+        <label for="content">내용</label>
+        <textarea id="content" name="content" required></textarea>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+        <button type="submit">게시글 작성</button>
+    </form>
+</div>
+
+<script src="/scripts/script_user.js" defer></script>
+
+<script>
+    function validateForm() {
+        // 제목, 내용 필드의 값 가져오기
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+
+        // 제목 또는 내용이 비어있는 경우
+        if (title === "" || content === "") {
+            alert("제목과 내용을 모두 입력해주세요.");
+            return false; // 제출 방지
+        }
+
+        return true; // 폼 제출
+    }
+</script>
+
+<hr>
+
+</body>
+</html>

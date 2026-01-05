@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>간단한 네비게이션 바</title>
+  <link rel="stylesheet" href="/css/admin/style-admin.css">
+  <link rel="stylesheet" href="/css/admin/style-admin-article.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/admin/navigation/nav-admin"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px; padding: 20px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+  <table>
+    <thead>
+    <tr>
+      <th>제목</th>
+      <th>신청자</th>
+      <th>신청일시</th>
+      <th>접수상태</th>
+    </tr>
+    </thead>
+    <tbody id="requestTableBody">
+    <tr class="request" th:each="request : ${requestList}">
+      <td><a th:href="'/admin/article/' + ${request.getId()}" th:text="${request.getTitle()}">게시물 제목 1</a></td>
+      <td><a th:href="'/admin/userinfo/' + ${request.getRequester().getIdNum()}" th:text="${request.getRequester().getName()}">작성자1</a></td>
+      <td th:text="${request.getTimeStamp()}">2024-04-8</td>
+      <td th:text="${request.statusString()}">1</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- 페이지 네비게이션 -->
+</div>
+
+</body>
+</html>

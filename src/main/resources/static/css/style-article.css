@@ -1,0 +1,133 @@
+/* 게시글 내용 스타일 */
+.content-article {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 게시글 정보 스타일 */
+.post-info {
+    margin-bottom: 10px;
+    font-style: italic;
+    display: flex;
+    justify-content: space-between; /* 요소 간 간격을 최대한 벌리기 */
+}
+
+p {
+    line-height: 1.6;
+}
+
+
+
+.reply-form-container {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.reply-form-container .replyer-title {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
+.reply-form-container .replyer-username {
+    font-style: italic;
+    margin-right: 10px;
+}
+
+.reply-form-container .reply-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.reply-form-container .reply-text {
+    flex: 1;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+}
+
+.reply-form-container .reply-button {
+    padding: 10px 10px;
+    height: 100px;
+
+    background-color: #FF8787;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reply-form-container .reply-button:hover {
+    background-color: #FF6666;
+}
+
+/* 댓글 컨테이너 스타일 */
+.comment-container {
+    border: 1px solid #ddd; /* 회색 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 처리 */
+    padding: 15px; /* 내부 여백 */
+    margin-bottom: 15px; /* 아래 여백 */
+}
+
+/* 댓글 제목 스타일 */
+.comment-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 각 댓글 스타일 */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* 연한 회색 테두리를 이용해 댓글 사이 구분 */
+}
+
+/* 댓글 헤더 스타일 */
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+}
+.rateUp-comment img{
+    width: 15px;
+    height: 15px;
+}
+.rateDown-comment img{
+    width: 15px;
+    height: 15px;
+}
+
+.comment-time{
+    font-size: small;
+}
+
+.comment-writer{
+    font-weight: bold;
+}
+
+/* 댓글 텍스트 스타일 */
+.comment-text {
+    color: #333;
+    line-height: 1.5;
+}
+
+.vote-area{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.vote-area button{
+    margin: 6px;
+    width: 70px;
+    height: 70px;
+}

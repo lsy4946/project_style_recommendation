@@ -1,0 +1,71 @@
+/* 게시판 목록 스타일 */
+.board {
+    text-align: left;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 게시글 목록 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #FF8787;
+    color: white;
+    font-weight: normal;
+}
+
+.post a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.post a:hover {
+    text-decoration: underline;
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+}
+
+.pagination a.active {
+    background-color: #FF8787;
+    color: white;
+    border: 1px solid #FF8787;
+}
+
+.add-post-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff051a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.add-post-button:hover {
+    background-color: #fd4242;
+}

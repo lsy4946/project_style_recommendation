@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>내 웹 페이지</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/delete.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 웹 페이지 내용 -->
+<div class="content">
+    <h1>게시글을 삭제하시겠습니까?</h1>
+    <p>삭제한 댓글은 복구할 수 없습니다.</p>
+
+    <form th:action="'/board/professional/article/' + ${article_id} + '/delete'" method="post">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="hidden" name="articleID" th:value="${article_id}">
+        <button class="delete-button" type="submit">삭제</button>
+    </form>
+</div>
+<hr>
+
+<script src="/scripts/script_user.js" defer></script>
+</body>
+</html>

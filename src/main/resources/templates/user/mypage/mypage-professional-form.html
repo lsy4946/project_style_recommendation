@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/user/style-user.css">
+    <link rel="stylesheet" href="/css/user/style-mypage.css">
+</head>
+<body>
+
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div th:replace="/user/navigation/nav-mypage"></div>
+<div class="content">
+    <div>
+        <h1>전문가 등급 신청</h1>
+        <form action="/mypage/request-role" method="post" class="professional-form">
+            <div class="professional-form-title">
+                <label for="title">제목 : </label>
+                <input type="text" id="title" name="title">
+            </div>
+            <label for="applicationForm">제출 서류</label>
+            <input type="file" id="applicationForm" name="applicationForm">
+            <textarea id="content" name="content"></textarea>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        </form>
+    </div>
+</div>
+
+<script src="/scripts/script_user.js" defer></script>
+
+<script>
+    function editProfile() {
+        // 입력 필드 수정 가능하도록 변경
+        document.getElementById('name').readOnly = false;
+        document.getElementById('email').readOnly = false;
+        document.getElementById('password').readOnly = false;
+        document.getElementById('profile-submit').style.display="block"
+    }
+
+</script>
+
+</body>
+</html>

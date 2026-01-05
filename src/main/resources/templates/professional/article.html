@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <meta name="article-id" th:if="${article != null}" th:content="${article.getArticleID()}">
+    <title>게시글 열람</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/style-board.css">
+    <link rel="stylesheet" href="/css/style-article.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 게시글 내용 -->
+<div class="content-article">
+    <div class="article" style="margin-bottom: 30px;">
+        <h1 th:text="${article.getTitle()}">게시글 제목</h1>
+        <hr>
+        <div class="post-info">
+            <span th:text="'작성자 : ' + ${article.getWriter().getUsername()}"></span>
+            <span th:text="'작성일 : ' + ${article.getTimeStamp()}"></span>
+            <span><span th:text="'조회수 : ' + ${article.getView()}"></span>
+                <span th:if="${username eq article.getWriter().getUsername()}">
+                    <a th:href="'/board/professional/article/' + ${article.getArticleID()} + 'delete'">삭제</a>
+                </span>
+            </span>
+        </div>
+        <hr>
+        <p th:text="${article.getContent()}"></p>
+        <div class="vote-area">
+            <form th:action="'/board/user/' + ${article.getArticleID()} + '/articleRateUp'" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                <button type="submit" class="item " id="rateUp">
+                    추천! <small th:text="${article.getRateUps().size()}"></small><br>
+                </button>
+            </form>
+            <form th:action="'/board/user/' + ${article.getArticleID()} + '/articleRateDown'" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                <button type="submit" class="item " id="rateDown">
+                    비추천 <small th:text="${article.getRateDowns().size()}">0</small><br>
+                </button>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+    <!--댓글-->
+    <div class="comment-container">
+        <div class="comment-title">
+            댓글
+        </div>
+        <hr>
+        <!--        <div class="comment">-->
+        <!--            <div class="comment-head">-->
+        <!--                <span class="comment-writer">username1</span>-->
+        <!--                <div>-->
+        <!--                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>-->
+        <!--                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>-->
+        <!--                </div>-->
+        <!--                <div><span class="comment-time">2024-04-12 18:09:42</span></div>-->
+        <!--            </div>-->
+        <!--            <hr>-->
+        <!--            <span class="comment-text">Lorem, ipsum dolor sit amet consectetur</span>-->
+        <!--        </div>-->
+        <p th:if="${article.getComments().isEmpty()}" th:text="'댓글이 없습니다.'"></p>
+        <div class="comment" th:each="comment : ${article.getComments()}">
+            <div class="comment-head">
+                <span class="comment-writer" th:text="${comment.writer.getUsername()}"></span>
+                <!--                <div>-->
+                <!--                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>-->
+                <!--                    <button class="rateUp-comment"><img src="rateUp.png" alt="">0</button>-->
+                <!--                </div>-->
+                <div>
+                    <div th:if="${username eq comment.writer.getUsername()}">
+                        <a th:href="'/board/professional/comment/' + ${article.getArticleID()} + '/' + ${comment.getCommentID()} + '/delete'"
+                           style="font-size: small; margin-right: 5px;">삭제</a>
+                    </div>
+                    <span class="comment-time">2024-04-12 18:09:42</span>
+                </div>
+            </div>
+            <hr>
+            <span class="comment-text" th:text="${comment.content}"></span>
+        </div>
+
+    </div>
+
+    <hr>
+    <!--댓글작성-->
+    <div class="reply-form-container">
+        <!--닉네임-->
+        <div>
+            <span class="replyer-title" style="float: left;">댓글 작성</span>
+            <span class="replyer-username" th:text="${username}">username</span>
+        </div>
+        <br>
+        <!--댓글 입력칸-->
+        <form class="reply-form" action="/board/reply" method="post">
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="hidden" name="articleID" th:value="${article.getArticleID()}">
+            <textarea class="reply-text" name="content" style="float: left; width: max-content;"></textarea>
+            <button class="reply-button" >작성</button>
+        </form>
+    </div>
+
+    <hr>
+
+    <!-- 게시글 목록 -->
+    <table>
+        <thead>
+        <tr>
+            <th>글제목</th>
+            <th>작성자</th>
+            <th>작성일시</th>
+            <th>조회수</th>
+        </tr>
+        </thead>
+        <tbody id="article-tablebody">
+        <tr th:each="articlerow : ${articleRowList}">
+            <td><a th:text="${articlerow.title}" th:href="${articlerow.link}"></a></td>
+            <td th:text="${articlerow.getWriter()}"></td>
+            <td th:text="${articlerow.getTimeStamp()}"></td>
+            <td th:text="${articlerow.getView()}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <!-- 페이지 네비게이션 -->
+    <div class="pagination">
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">▶</a>
+        <a href="#">▶▶</a>
+    </div>
+</div>
+<hr>
+<script src="/scripts/script_user.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>신고 페이지</title>
+    <link rel="stylesheet" href="/css/user/style-user.css">
+    <link rel="stylesheet" href="/css/user/style-report.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 신고 작성 폼 -->
+<div class="content">
+    <h1>신고 작성</h1>
+    <form th:action="'/user/' + ${board} + '/report/' +${object_type} + '/' + ${object_id}" method="POST" onsubmit="return validateReportForm()">
+        <label for="reportTitle">신고 제목</label>
+        <input type="text" id="reportTitle" name="reportTitle" required>
+
+        <p>작성자 : </p>
+        <p th:text="${username}"></p>
+
+        <label for="reportReason">신고 사유</label>
+        <select id="reportReason" name="reportReason" onchange="toggleReportContent()" required>
+            <option value="">신고 사유를 선택하세요</option>
+            <option value="spam">스팸</option>
+            <option value="abuse">욕설/비방</option>
+            <option value="inappropriate">부적절한 콘텐츠</option>
+            <option value="other">기타</option>
+        </select>
+
+        <label for="reportContent">신고 내용</label>
+        <textarea id="reportContent" name="reportContent" style="display: none"></textarea>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+        <button type="submit">신고하기</button>
+    </form>
+</div>
+
+<script>
+    function validateReportForm() {
+        // 신고 제목, 내용, 사유 필드의 값 가져오기
+        var reportTitle = document.getElementById("reportTitle").value;
+        var reportReason = document.getElementById("reportReason").value;
+        var reportContent = document.getElementById("reportContent").value;
+
+        reportContent.display="none"
+
+        // 신고 제목, 내용 또는 사유가 비어있는 경우
+        if (reportTitle === "" || reportReason === "" || (reportReason==="other" && reportContent === "")) {
+            alert("신고 제목, 신고 사유 및 신고 내용을 모두 입력해주세요.");
+            return false; // 제출 방지
+        }
+
+        return true; // 폼 제출
+    }
+
+    function toggleReportContent() {
+        var reportReason = document.getElementById("reportReason").value;
+        var reportContent = document.getElementById("reportContent");
+        var reportContentLabel = document.getElementById("reportContentLabel");
+
+        if (reportReason === "other") {
+            reportContent.style.display = "block";
+            reportContentLabel.style.display = "block";
+            reportContent.required = true;
+        } else {
+            reportContent.style.display = "none";
+            reportContentLabel.style.display = "none";
+            reportContent.required = false;
+        }
+    }
+
+</script>
+<script src="/scripts/script_user.js" defer></script>
+<hr>
+
+</body>
+</html>

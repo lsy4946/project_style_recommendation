@@ -1,0 +1,46 @@
+/* 네비게이션 바 스타일 */
+nav {
+    height: 100vh; /* 화면 높이 전체 */
+    width: 200px; /* 네비게이션 바 폭 */
+    position: fixed; /* 화면 위치 고정 */
+    top: 0;
+    left: 0;
+    background-color: #333; /* 배경색 */
+    padding-top: 20px; /* 상단 여백 */
+    color: white; /* 글자색 */
+}
+
+nav a {
+    display: block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+}
+
+nav a:hover {
+    background-color: #555; /* 호버시 배경색 */
+}
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+.post-info {
+    margin-bottom: 10px;
+    font-style: italic;
+    display: flex;
+    justify-content: space-between; /* 요소 간 간격을 최대한 벌리기 */
+}
+
+p {
+    line-height: 1.6;
+}

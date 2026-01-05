@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>내 웹 페이지</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 웹 페이지 내용 -->
+<div class="content">
+    <div class="hair-container">
+        <span th:text="${description}"></span>
+        <img th:src="${filePath}" alt="헤어 스타일 이미지 1">
+        <select>
+            <option>5</option>
+            <option>4</option>
+            <option>3</option>
+            <option>2</option>
+            <option>1</option>
+        </select>
+        <button>삭제</button>
+    </div>
+
+</div>
+<hr>
+
+<script src="/scripts/script_user.js" defer></script>
+<script>
+
+</script>
+</body>
+</html>

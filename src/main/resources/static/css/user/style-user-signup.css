@@ -1,0 +1,44 @@
+/* 회원가입 폼 스타일 */
+.signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="name"],
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: calc(100% - 100px); /* 버튼 공간만큼 입력칸 너비 조정 */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+button {
+    background-color: #FF8787;
+    color: white;
+    padding: 10px; /* 입력 칸과 동일한 상하 여백 */
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: auto; /* 버튼 너비 지정 */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+button:hover {
+    background-color: #FF6666;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}

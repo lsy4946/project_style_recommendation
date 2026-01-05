@@ -1,0 +1,93 @@
+/* 네비게이션 바 스타일 */
+nav {
+    background-color: #FF8787; /* 배경색 */
+    overflow: hidden;
+}
+
+nav a {
+    float: left; /* 왼쪽 정렬 */
+    display: block;
+    color: white; /* 글자색 */
+    text-align: center;
+    padding: 14px 20px; /* 위아래 왼오 여백 */
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd; /* 호버시 배경색 */
+    color: black; /* 호버시 글자색 */
+}
+
+nav a.home {
+    font-weight: bold;
+    color: bisque;
+}
+
+nav a.login {
+    float: right; /* 오른쪽 정렬 */
+    display: block;
+    color: white; /* 글자색 */
+    padding: 14px 20px;
+    text-align: right;
+}
+
+/* 페이지 내 컨텐츠 스타일 */
+.content {
+    padding: 20px;
+    margin-bottom: 100px;
+}
+
+h1 {
+    color: #333;
+}
+
+h2 {
+    color: #666;
+}
+
+.start-btn {
+    background-color: #FF8787;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    align-items: center; /* 아이콘과 텍스트 수직 정렬 */
+    justify-content: center; /* 아이콘과 텍스트 수평 정렬 */
+}
+
+.start-btn:hover {
+    background-color: #FF6666;
+}
+
+.start-btn img {
+    width: 20px; /* 아이콘 크기 지정 */
+    height: 20px;
+    margin-right: 10px; /* 아이콘과 텍스트 사이 간격 */
+}
+
+.content {
+    text-align: center;
+}
+
+.advantages {
+    display: flex;
+    justify-content: space-around; /* 아이템 간의 간격을 균등하게 배치 */
+    align-items: center; /* 수직 정렬 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.advantages-item {
+    text-align: center;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+    width: 30%; /* 각 아이템의 너비 지정 */
+}
+
+.advantages-item img {
+    width: 75px; /* 아이콘 이미지 크기 지정 */
+    height: 75px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="meta-username" th:content="${username}">
+  <meta name="meta-user-role" th:content="${userRole}">
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="/css/user/style-user.css">
+  <link rel="stylesheet" href="/css/user/style-user-reservation.css">
+</head>
+<body>
+
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div class="content-style">
+  <h2 class="h2-reservation">스타일리스트 목록</h2>
+  <hr>
+  <div class="box-container">
+
+    <div class="stylist-container" th:each="profile : ${profileList}">
+      <span th:text="${profile.getName()}">헤어 스타일 제목 1</span>
+      <img th:src="'/created/' + ${profile.setPhoto_src()}" alt="헤어 스타일 이미지 1">
+      <a class="reserve-button" th:href="'/user/reserve/' + ${profile.getId()}">예약 하기</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

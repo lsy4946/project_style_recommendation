@@ -1,0 +1,68 @@
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-term {
+    margin-top: 20px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* 사용자가 크기 조정할 수 없도록 설정 */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+button {
+    text-align: center;
+    background-color: #FF8787;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #FF6666;
+}

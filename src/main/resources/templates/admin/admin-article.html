@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 네비게이션 바</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            height: 100vh; /* 화면 높이 전체 */
+            width: 200px; /* 네비게이션 바 폭 */
+            position: fixed; /* 화면 위치 고정 */
+            top: 0;
+            left: 0;
+            background-color: #333; /* 배경색 */
+            padding-top: 20px; /* 상단 여백 */
+            color: white; /* 글자색 */
+        }
+
+        nav a {
+            display: block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* 배경색 전환 애니메이션 */
+        }
+
+        nav a:hover {
+            background-color: #555; /* 호버시 배경색 */
+        }
+        .content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .post-info {
+            margin-bottom: 10px;
+            font-style: italic;
+            display: flex;
+            justify-content: space-between; /* 요소 간 간격을 최대한 벌리기 */
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* 버튼 스타일 */
+        .action-buttons {
+            
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #FF8787;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #FF6666;
+        }
+
+        .board {
+            text-align: left;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #1d1d1d;
+            color: white;
+            font-weight: normal;
+        }
+
+        .post a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #ddd;
+            margin-right: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #008791;
+            color: white;
+            border: 1px solid #008791;
+        }
+        .comment-container {
+    border: 1px solid #ddd; /* 회색 테두리 */
+    border-radius: 5px; /* 모서리 둥글게 처리 */
+    padding: 15px; /* 내부 여백 */
+    margin-bottom: 15px; /* 아래 여백 */
+}
+
+/* 댓글 제목 스타일 */
+.comment-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 각 댓글 스타일 */
+.comment {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* 연한 회색 테두리를 이용해 댓글 사이 구분 */
+}
+
+/* 댓글 헤더 스타일 */
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    
+}
+.rateUp-comment img{
+    width: 15px;
+    height: 15px;
+}
+.rateDown-comment img{
+    width: 15px;
+    height: 15px;
+}
+
+.comment-time{
+    font-size: small;
+}
+
+.comment-writer{
+    font-weight: bold;
+}
+
+/* 댓글 텍스트 스타일 */
+.comment-text {
+    color: #333;
+    line-height: 1.5;
+}
+    </style>
+</head>
+<body>
+
+<div th:repalce="/admin/navigation/nav-admin.html"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px; padding: 20px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+    <div class="article" style="margin-bottom: 100px;">
+        <h1 th:text="${article.getTitle()}">게시글 제목</h1>
+        <hr>
+        <div class="post-info">
+            <div><span>작성자: </span> <a th:href="'/admin/userinfo' + ${article.getWriter().getIdNum()}" th:text="${article.getWriter().getUsername()}">username</a></div>
+            <span th:text="'작성일 : ' + ${article.getTimeStamp()}">작성일: 2024-04-08</span>
+            <span th:text="'조회수 : ' + ${article.getView()}">조회수: 100</span>
+        </div>
+        <hr>
+        <p th:text="${article.getContent()}">
+            게시글 내용을 여기에 작성합니다. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </p>
+    </div>
+    <hr>
+    <!-- 이용자 차단, 게시글 삭제 버튼 -->
+<div class="action-buttons">
+    <button onclick="blockUser()">이용자 차단</button>
+    <button onclick="deletePost()">게시글 삭제</button>
+</div>
+        <!--댓글-->
+        <div class="comment-container">
+            <div class="comment-title">
+                댓글
+            </div>
+            <hr>
+            <div th:each="comment : ${article.getComments()}" class="comment">
+                <div class="comment-head">
+                    <span th:text="${comment.getWriter().getUsername()}" class="comment-writer">username2</span>
+                    <div>
+                        <a th:href="'/admin/ban/' + ${comment.getWriter().getIdNum()}" style="font-size: small; margin-right: 5px;">차단</a>
+                        <a th:href="'/admin/comment/delete/' + ${comment.getCommentID()}" style="font-size: small; margin-right: 5px;">삭제</a>
+                        <span class="comment-time" th:text="${comment.getTimeStamp()}">2024-04-12 18:09:42</span></div>
+                    </div>
+                <hr>
+                <span class="comment-text" th:text="${comment.getContent()}">Lorem, ipsum dolor sit amet consectetur</span>
+            </div>
+        </div>
+</div>
+
+
+<hr>
+<div style="margin-left: 200px; padding: 20px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const postsPerPage = 15;
+        const totalPosts = 30;
+        const totalPages = 10;
+        const postTableBody = document.getElementById("postTableBody");
+        const paginationContainer = document.getElementById("pagination");
+
+
+
+        // 페이지 네비게이션 자동 생성
+        for (let i = 1; i <= totalPages; i++) {
+            const pageLink = document.createElement("a");
+            pageLink.href = "#";
+            pageLink.textContent = i;
+            if (i === 1) {
+                pageLink.classList.add("active");
+            }
+            pageLink.addEventListener("click", function(event) {
+                event.preventDefault();
+                // 페이지 전환 로직을 구현할 수 있습니다
+                // 이 예제에서는 페이지 번호 클릭 시 active 클래스만 토글합니다
+                const currentPage = document.querySelector(".pagination a.active");
+                currentPage.classList.remove("active");
+                pageLink.classList.add("active");
+            });
+            paginationContainer.appendChild(pageLink);
+        }
+    });
+</script>
+
+<!-- JavaScript로 동작 구현 -->
+<script>
+    function blockUser() {
+        if(confirm("이용자를 차단하시겠습니까?")){
+            alert("이용자를 차단합니다.");
+        }
+        // 여기에 이용자 차단 동작 구현
+    }
+
+    function deletePost() {
+        if (confirm("게시글을 삭제하시겠습니까?")) {
+            alert("게시글이 삭제되었습니다.");
+            // 여기에 게시글 삭제 동작 구현
+        }
+    }
+</script>
+
+</body>
+</html>

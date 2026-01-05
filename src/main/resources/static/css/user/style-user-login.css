@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 100px auto; /* 상단 여백 추가 및 자동 가운데 정렬 */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #FF8787;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #FF6666;
+}

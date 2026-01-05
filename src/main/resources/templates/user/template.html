@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>내 웹 페이지</title>
+    <style>
+        /* 네비게이션 바 스타일 */
+        nav {
+            background-color: #FF8787; /* 배경색 */
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left; /* 왼쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            text-align: center;
+            padding: 14px 20px; /* 위아래 왼오 여백 */
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd; /* 호버시 배경색 */
+            color: black; /* 호버시 글자색 */
+        }
+
+        nav a.home {
+            font-weight: bold;
+            
+        }
+
+        nav a.login {
+            float: right; /* 오른쪽 정렬 */
+            display: block;
+            color: white; /* 글자색 */
+            padding: 14px 20px;
+            text-align: right;
+        }
+
+        /* 페이지 내 컨텐츠 스타일 */
+        .content {
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        .content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<!-- 웹 페이지 내용 -->
+<div class="content">
+    
+</div>
+
+<hr>
+
+
+
+</body>
+</html>

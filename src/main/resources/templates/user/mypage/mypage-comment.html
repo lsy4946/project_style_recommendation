@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/style-user.css">
+    <link rel="stylesheet" href="/css/style-mypage.css">
+</head>
+<body>
+
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div th:replace="/user/navigation/nav-mypage"></div>
+<div class="content">
+
+        <!-- 게시글 목록 -->
+        <table style="margin-bottom: 30px;">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                    </th>
+                    <th>댓글</th>
+                    
+                    <th>작성일시</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aliquam tenetur</a></td>
+                    
+                    <td>2024-04-08</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aliquam tenetur</a></td>
+                    
+                    <td>2024-04-08</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aliquam tenetur</a></td>
+                    
+                    <td>2024-04-08</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aliquam tenetur</a></td>
+                    
+                    <td>2024-04-08</td>
+                </tr>
+                <tr class="post">
+                    <td><input type="checkbox"></td>
+                    <td><a href="post1.html">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius aliquam tenetur</a></td>
+                    
+                    <td>2024-04-08</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <button>
+            삭제
+        </button>
+</div>
+
+<script src="/scripts/script_user.js" defer></script>
+<script>
+    function editProfile() {
+        // 입력 필드 수정 가능하도록 변경
+        document.getElementById('email').readOnly = false;
+        document.getElementById('password').readOnly = false;
+    }
+
+    function deleteAccount() {
+        // 회원 탈퇴 로직 구현
+        if (confirm('정말로 회원을 탈퇴하시겠습니까?')) {
+            // 탈퇴 처리
+            alert('회원 탈퇴가 완료되었습니다.');
+            window.location.href = 'logout.php'; // 로그아웃 페이지로 이동
+        }
+    }
+
+    function logout() {
+        // 로그아웃 처리
+        window.location.href = 'logout.php'; // 로그아웃 페이지로 이동
+    }
+</script>
+
+</body>
+</html>

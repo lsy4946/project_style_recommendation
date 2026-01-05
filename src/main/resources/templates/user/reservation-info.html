@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/user/style-user.css">
+    <link rel="stylesheet" href="/css/user/style-user-result.css">
+</head>
+<body>
+
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div class="content-style">
+    <h2 th:text="${profile.getName()}"></h2>
+    <label for="address">주소 : </label>
+    <p id="address" th:text="${profile.getAddress()}"></p>
+    <hr>
+    <br>
+    <span th:text="${profile.getIntro()}"></span>
+    <hr>
+    <form th:action="'/user/reserve/' + ${profile.getOwner().getIdNum()}" method="post">
+        <input type="date" name="date" id="date">
+        <input type="time" name="time" id="time">
+        <button type="submit">예약하기</button>
+        <button type="button" id="show-container-button">스타일 미리 고르기</button>
+        <input type="radio" name="styleId" value="0" style="display: none">
+        <div class="box-container" id="box-container" style="display: none">
+            <div class="hair-container" th:each="style, iterStat : ${styleList}">
+                <span th:text="${style.getDescription()}"></span>
+                <img th:src="'/created/' + ${style.getFilePath()}" alt="헤어 스타일 이미지 1">
+                <input type="radio" name="styleId" th:value="${style.getStyleid()}">
+            </div>
+        </div>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+
+    </form>
+</div>
+
+<script>
+    // 오늘 날짜를 'YYYY-MM-DD' 형식으로 얻는 함수
+    function getToday() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // 날짜 입력 필드에 min 속성 설정
+    document.getElementById('date').min = getToday();
+
+    var boxContainer = document.getElementById("box-container")
+    var showButton = document.getElementById("show-container-button")
+    function onShow(){
+        boxContainer.style.display="block"
+        showButton.style.display="none"
+    }
+</script>
+</body>
+</html>

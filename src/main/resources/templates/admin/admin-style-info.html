@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유저 정보</title>
+    <link rel="stylesheet" href="admin_style.css">
+</head>
+<body>
+
+<!-- 네비게이션 바 -->
+<div th:repalce="/admin/navigation/nav-admin.html"></div>
+
+<!-- 페이지 내용 -->
+<div style="margin-left: 200px;"> <!-- 네비게이션 바 폭 만큼 왼쪽 여백 설정 -->
+    <h1>헤어이름</h1>
+
+    <div class="content">
+        <img src="example.png" alt="">
+        <div class="style-info">
+            <div>
+                <label for="length">길이 : </label>
+                <span>단발</span>
+            </div>
+            <div>
+                <label for="curl">컬 : </label>
+                <span>스트레이트</span>
+            </div>
+            <br>
+            <span class="textInfo">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti debitis incidunt eaque quam aliquam doloribus, laboriosam totam odio recusandae. Eligendi labore non sunt deserunt delectus hic maxime fugit sit quibusdam!
+            </span>
+            <button>
+                삭제
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 사용자 차단/차단해제 상태 업데이트 함수
+    function updateUserStatus() {
+        var userStatus = document.getElementById("userStatus").value;
+        var statusText = userStatus === "blocked" ? "차단됨" : "차단해제됨";
+        alert("사용자 상태가 '" + statusText + "'으로 변경되었습니다.");
+    }
+</script>
+
+</body>
+</html>

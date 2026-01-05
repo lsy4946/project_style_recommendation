@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="meta-username" th:content="${username}">
+    <meta name="meta-user-role" th:content="${userRole}">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="/css/user/style-user.css">
+    <link rel="stylesheet" href="/css/user/style-mypage.css">
+</head>
+<body>
+
+<div th:replace="/user/navigation/nav_user.html"></div>
+
+<div th:replace="/user/navigation/nav-mypage"></div>
+<div class="content">
+    <div>
+        <h1>내 가게 프로필</h1>
+        <img th:src="${profile.getPhoto_src()}">
+        <span th:if="${profile.getPhoto_src().isEmpty()}">사진이 없습니다.</span>
+        <form action="/mypage/request-role" method="post" class="professional-form">
+            <div class="professional-profile-name">
+                <label for="title">가게이름 : </label>
+                <input type="text" id="title" name="title" th:value="${profile.getName()}" readonly>
+            </div>
+            <label for="address">주소</label>
+            <input type="text" id="address" name="address" th:value="${profile.getAddress()}" readonly>
+            <textarea id="intro" name="intro" th:value="${profile.getIntro()}" readonly></textarea>
+            <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+            <input type="file" name="photo" id="photo" style="display: none">
+            <button type="button" id="profile-form-button">수정하기</button>
+        </form>
+    </div>
+</div>
+
+<script src="/scripts/script_user.js" defer></script>
+
+<script>
+    var title = document.getElementById('title')
+    var intro = document.getElementById('intro')
+    var address = document.getElementById('address')
+    var photo = document.getElementById('photo')
+    var button = document.getElementById('profile-form-button')
+    function editProfile() {
+        // 입력 필드 수정 가능하도록 변경
+        title.readOnly=false
+        intro.readOnly=false
+        address.readOnly=false
+        photo.style.display='block'
+        button.type='submit'
+    }
+
+</script>
+
+</body>
+</html>
